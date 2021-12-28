@@ -34,7 +34,7 @@ strong_borderx = [-1 -2 -1;0 0 0;1 2 1];
 strong_bordery = [-1 0 1; -2 0 2; -1 0 1];
 allnames = struct2cell(dir('*.tif'));
 [k,len]=size(allnames);
-aviobj = VideoWriter('fianlVideo2.avi');%輸出後的影片名稱
+aviobj = VideoWriter('fianlVideo5.avi');%輸出後的影片名稱
 aviobj.FrameRate = 30; %設定1秒幾幀(張圖)
 open(aviobj)
 grey = zeros(1078,1918);
@@ -54,9 +54,9 @@ for i = 1:len
     invert_img = 255 - strong;
     blur_img = imgaussfilt(invert_img, 150);
     invblur_img = 255 - blur_img;
-    target = (strong*256) ./ invblur_img;
-    target2 = ((target ./ 255) .^ 0.6) * 255;
-    target3 = target2-double(g)*4;
+    target = (strong*200) ./ invblur_img;
+    target2 = ((target ./ 255) .^ 0.4) * 255;
+    target3 = target2-double(g)*6;
   
     frame = uint8(real(target3));
     writeVideo(aviobj,frame);
